@@ -30,7 +30,9 @@ router.post("/register", isAuthDataCorrect, async (req, res) => {
 
     return res.send({ message: "Succesfully registered account" });
   } catch (err) {
-    console.log(err);
+    if (err.message.toLowerCase().includes("dup")) {
+      return res.status(500).send({ error: "Email is already in use" });
+    }
     return res
       .status(500)
       .send({ error: "An unexpected error occured. Please try again" });
