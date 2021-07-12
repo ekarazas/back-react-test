@@ -49,12 +49,12 @@ router.post("/login", isAuthDataCorrect, async (req, res) => {
       return res.status(400).send({ error: "Email or password is incorrect" });
     }
 
-    const validEmail = bcrypt.compareSync(
+    const passwordValidation = bcrypt.compareSync(
       req.userData.password,
       data[0].password
     );
 
-    if (!validEmail) {
+    if (!passwordValidation) {
       return res.status(400).send({ error: "Email or password is incorrect" });
     }
 
