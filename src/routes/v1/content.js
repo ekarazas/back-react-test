@@ -10,7 +10,7 @@ router.get("/teams", isLoggedIn, async (req, res) => {
     const con = await mysql.createConnection(mysqlConfig);
 
     const [data] = await con.execute("SELECT * FROM teams");
-    
+
     con.end();
 
     if (data.length === 0) {

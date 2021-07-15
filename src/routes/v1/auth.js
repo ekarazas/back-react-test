@@ -15,9 +15,9 @@ router.post("/register", isAuthDataCorrect, async (req, res) => {
     const hashedPassword = bcrypt.hashSync(req.userData.password, 10);
 
     const [data] = await con.execute(
-      `INSERT INTO users (email, password) VALUES (${mysql.escape(
-        req.userData.email
-      )}, '${hashedPassword}')`
+      `INSERT INTO users (name, email, password) VALUES (${mysql.escape(
+        req.body.name
+      )},${mysql.escape(req.userData.email)}, '${hashedPassword}')`
     );
 
     con.end();
